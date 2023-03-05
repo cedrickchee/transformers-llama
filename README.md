@@ -14,6 +14,64 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
+# LLaMA models with HuggingFace
+
+A code example using [HuggingFace compatible LLaMA models](https://github.com/huggingface/transformers/pull/21955).
+
+## 1. Install HuggingFace library from source
+
+```sh
+$ git clone https://github.com/cedrickchee/transformers-llama.git
+$ cd transformers-llama
+$ python setup.py develop --user
+```
+
+## 2. Convert the weights to HuggingFace format
+
+The converted weigths are in `/weights/llama/hf/`.
+
+```sh
+# grab from src/transformers/models/convert_llama_weights_to_hf.py
+$ python src/transformers/models/llama/convert_llama_weights_to_hf.py \
+    --input_dir /path/to/downloaded/llama/weights \
+    --model_size 7B \
+    --output_dir /weights/llama/hf/
+```
+
+## 3. Run inference
+
+**8-bit quantized model:**
+
+```sh
+$ python examples/alpha/run_llama.py
+    --variant 7b
+    --model_path /weights/llama/hf/
+    --do_int8
+    --low_cpu_mem_usage
+```
+
+**Regular model (fp16):**
+
+```sh
+$ python examples/alpha/run_llama.py
+    --variant 7b
+    --model_path /weights/llama/hf/
+    --low_cpu_mem_usage
+```
+
+FYI, the core of LLaMA implementation for HuggingFace library is in these files:
+
+- `src/transformers/models/llama/modeling_llama.py`: model
+- `src/transformers/models/llama/configuration_llama.py`: configuration
+- `src/transformers/models/llama/tokenization_llama.py`: tokenizer
+- `src/transformers/models/llama/convert_llama_weights_to_hf.py`: transform weights, state dicts, layers, etc.
+
+The other source files are boilerplate, unit tests, and documentations.
+
+---
+
+# Old README
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://huggingface.co/datasets/huggingface/documentation-images/raw/main/transformers-logo-dark.svg">
