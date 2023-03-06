@@ -38,6 +38,12 @@ $ python src/transformers/models/llama/convert_llama_weights_to_hf.py \
     --output_dir /weights/llama/hf/
 ```
 
+How to differentiate between HuggingFace (HF) converted weights and original weights from MetaAI?
+Just by simply eye-balling the filenames.
+
+- The original weights have this filename pattern: `consolidated.XX.pth`
+- The HF converted weights have this filename pattern: `pytorch_model-0000X-of-0000X.bin`
+
 ## 3. Run inference
 
 **8-bit quantized model:**
@@ -67,6 +73,18 @@ FYI, the core of LLaMA implementation for HuggingFace library is in these files:
 - `src/transformers/models/llama/convert_llama_weights_to_hf.py`: transform weights, state dicts, layers, etc.
 
 The other source files are boilerplate, unit tests, and documentations.
+
+<details>
+<summary><b>Download the HuggingFace converted model weights here</b></summary>
+
+If the conversion is too slow, someone have shared converted weights. But I cannot confirm.
+(I don't own this.)
+
+```
+magnet:?xt=urn:btih:dfd88399d0ea53e2d38654ea9d5c15267ce1922d&dn=LLaMA-HF&tr=http%3a%2f%2fbt1.archive.org%3a6969%2fannounce&tr=http%3a%2f%2fbt2.archive.org%3a6969%2fannounce
+```
+
+</details>
 
 ---
 
