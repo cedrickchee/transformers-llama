@@ -1,4 +1,4 @@
-# Copyright 2020 The HuggingFace Team. All rights reserved.
+# Copyright 2022 EleutherAI and The HuggingFace Inc. team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,13 +13,25 @@
 # limitations under the License.
 from typing import TYPE_CHECKING
 
-from ...utils import OptionalDependencyNotAvailable, _LazyModule, is_torch_available
+from ...utils import (
+    OptionalDependencyNotAvailable,
+    _LazyModule,
+    is_torch_available,
+    is_sentencepiece_available,
+)
 
 
 _import_structure = {
     "configuration_llama": ["LLAMA_PRETRAINED_CONFIG_ARCHIVE_MAP", "LLaMAConfig"],
-    "tokenization_llama": ["LLaMATokenizer"],
 }
+
+try:
+    if not is_sentencepiece_available():
+        raise OptionalDependencyNotAvailable()
+except OptionalDependencyNotAvailable:
+    pass
+else:
+    _import_structure["tokenization_llama"] = ["LLaMATokenizer"]
 
 try:
     if not is_torch_available():
@@ -36,7 +48,14 @@ else:
 
 if TYPE_CHECKING:
     from .configuration_llama import LLAMA_PRETRAINED_CONFIG_ARCHIVE_MAP, LLaMAConfig
-    from .tokenization_llama import LLaMATokenizer
+
+    try:
+        if not is_sentencepiece_available():
+            raise OptionalDependencyNotAvailable()
+    except OptionalDependencyNotAvailable:
+        pass
+    else:
+        from .tokenization_llama import LLaMATokenizer
 
     try:
         if not is_torch_available():
