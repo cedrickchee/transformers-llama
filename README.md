@@ -18,6 +18,10 @@ limitations under the License.
 
 A code example using [HuggingFace compatible LLaMA models](https://github.com/huggingface/transformers/pull/21955).
 
+**Status:** "Here be dragons"
+
+_Note: this is **Work-In-Progress**. All the code is not well-tested yet. Encounter issues? See: [issues](https://github.com/huggingface/transformers/pull/21955#issuecomment-1461099188)._
+
 ## 1. Install HuggingFace library from source
 
 ```sh
