@@ -16,7 +16,7 @@ limitations under the License.
 
 # LLaMA models with HuggingFace
 
-A code example using [HuggingFace compatible LLaMA models](https://github.com/huggingface/transformers/pull/21955).
+A code example using [HuggingFace compatible LLaMA models](https://huggingface.co/docs/transformers/main/en/model_doc/llama).
 
 **Status:** "Here be dragons"
 
